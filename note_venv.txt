@@ -1,0 +1,9 @@
+python -m venv env
+
+python -m venv env รอจนเสร็จ (  อาจนานหน่อย !!!)
+env\Scripts\activate เพื่อเข้า  vitural env
+
+deactivate
+
+pip freeze > requirements.txt  สำหรับสร้างไฟล์ requirements.txt
+pip install -r requirements.txt สำหรับ install  lib  ต่างๆ
