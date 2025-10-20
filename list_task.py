@@ -31,11 +31,11 @@ def main(page):
             ],
             width=180
         )
-    tab_drop_down.value ="default"
 
     page_type_drop_down = ft.Dropdown(
         label="ประเภทหน้า",
          options=[ 
+            ft.dropdown.Option(text="ประเภทหน้า", key="default"),
             ft.dropdown.Option(text="หน้าแม่", key="หน้าแม่"),
             ft.dropdown.Option(text="หน้าลูก", key="หน้าลูก")
         ],
@@ -45,15 +45,17 @@ def main(page):
     child_type_drop_down = ft.Dropdown(
         label="ประเภทหน้าลูก",
          options=[ 
+            ft.dropdown.Option(text="เลือกประเภทหน้าลูก", key="default"),
             ft.dropdown.Option(text="critiria", key="critiria"),
             ft.dropdown.Option(text="ตาราง", key="critiria")
         ],
-        width=180
+        width=200
     )
 
     function_drop_down = ft.Dropdown(
         label="Function",
          options=[ 
+            ft.dropdown.Option(text="เลือก Function", key="default"),
             ft.dropdown.Option(text="สร้าง Control", key="สร้าง Control"),
             ft.dropdown.Option(text="สร้าง", key="สร้าง"),
             ft.dropdown.Option(text="Function Validate", key="Function Validate"),
@@ -63,27 +65,51 @@ def main(page):
         width=180
     )
 
-    description_field = ft.TextField(width=270)
+    description_field = ft.TextField(width=320)
     
     def gen_out_put(e):#function  สร้าง output
-        out_put_field.value = tab_drop_down.value
+
+        out_put = out_put_field.value
+        flag = 0
+
+        if tab_drop_down.value != "default" :
+            out_put = out_put +"Tab "+tab_drop_down.value+" "
+            flag = 1
+
+        if page_type_drop_down.value != "default" :
+            out_put = out_put + page_type_drop_down.value+" "
+            flag = 1
+        
+        if child_type_drop_down.value != "default" :
+            out_put = out_put + child_type_drop_down.value+" "
+            flag = 1
+
+        if function_drop_down.value != "default" :
+            out_put = out_put + function_drop_down.value+" "
+            flag = 1
+
+        if description_field.value != "" :
+            out_put = out_put + description_field.value+" "
+            flag = 1
+
+        if flag != 0 :
+            out_put = out_put + "\n"
+
+        out_put_field.value = out_put
+
         page.update()#ต้องมี  Update  ด้วย
+        clear_input(None)
 
     gen_btn =  ft.FilledButton(text="Generate",style=ft.ButtonStyle(
                 shape=ft.RoundedRectangleBorder(radius=10),
     ),width=100,on_click=gen_out_put)
 
     def clear_input(e):
-        description_field.value ="default"
-        tab_drop_down.value = ""
-        # tab_drop_down.value = ""
-        # page_type_drop_down.value = ""
-        # child_type_drop_down.value = ""
-        # function_drop_down.value = ""
-
-        
-        #Update all components
-        tab_drop_down.update()
+        description_field.value =""
+        tab_drop_down.value = "default"
+        page_type_drop_down.value = "default"
+        child_type_drop_down.value = "default"
+        function_drop_down.value = "default"
         page.update()#ต้องมี  Update  ด้วย
         
 
@@ -96,19 +122,21 @@ def main(page):
                                         child_type_drop_down,
                                         function_drop_down,
                                         description_field,
-                                        gen_btn,
-                                        clear_btn
+                                        
                                         ])
+    row_button_control = ft.Row(controls=[gen_btn,clear_btn])
     out_put_field = ft.TextField(
         expand=True,  # This makes the TextField expand to fill available width
         multiline=True,
         min_lines=5)
     
     row_out_put_control = ft.Row(controls=[out_put_field])
-
     
 
+    clear_input(None)#กำหนดค่า  Default
+
     page.add(row_input_control)
+    page.add(row_button_control)
     page.add(row_out_put_control)
 
 ft.app(target=main)
