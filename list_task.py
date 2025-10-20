@@ -27,7 +27,8 @@ def main(page):
             options=[ 
                 ft.dropdown.Option(text="เลือกประเภท Tab", key="default"),
                 ft.dropdown.Option(text="Maintenance", key="Maintenance"),
-                ft.dropdown.Option(text="Upload", key="Upload")
+                ft.dropdown.Option(text="Upload", key="Upload"),
+                ft.dropdown.Option(text="Add Item", key="Add Item")
             ],
             width=180
         )
@@ -57,7 +58,9 @@ def main(page):
          options=[ 
             ft.dropdown.Option(text="เลือก Function", key="default"),
             ft.dropdown.Option(text="สร้าง Control", key="สร้าง Control"),
+            ft.dropdown.Option(text="Control", key="Control"),
             ft.dropdown.Option(text="สร้าง", key="สร้าง"),
+            ft.dropdown.Option(text="สร้าง Function", key="สร้าง Function"),
             ft.dropdown.Option(text="Function Validate", key="Function Validate"),
             ft.dropdown.Option(text="Function", key="Function"),
             ft.dropdown.Option(text="เรียก  API", key="เรียก  API")
@@ -65,7 +68,7 @@ def main(page):
         width=180
     )
 
-    description_field = ft.TextField(width=320)
+    description_field = ft.TextField(width=340)
     
     def gen_out_put(e):#function  สร้าง output
 
