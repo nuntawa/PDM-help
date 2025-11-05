@@ -7,3 +7,10 @@ deactivate
 
 pip freeze > requirements.txt  สำหรับสร้างไฟล์ requirements.txt
 pip install -r requirements.txt สำหรับ install  lib  ต่างๆ
+
+install kivy
+python -m pip install "kivy[base]"
+--trusted-host pypi.org --trusted-host pypi.python.org --trusted-host=files.pythonhosted.org
+ใส่ เผื่อ โดน block
+
+
