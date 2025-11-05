@@ -1,0 +1,40 @@
+Python option
+
+class MyClass:
+  x = 5
+
+p1 = MyClass()
+print(p1.x)
+
+
+
+***Delete the p1 object:
+del p1
+
+
+p1 = MyClass()
+p2 = MyClass()
+p3 = MyClass()
+
+print(p1.x)
+print(p2.x)
+print(p3.x)
+
+
+class definitions cannot be empty, but if you for some reason have a class definition with no content
+class Person:
+  pass
+
+built-in method called __init__(), which is always executed when the class is being initiated.
+class Person:
+  def __init__(self, name, age):
+    self.name = name
+    self.age = age
+
+p1 = Person("Emil", 36)
+
+print(p1.name)
+print(p1.age)
+
+The __init__() method is used to assign values to object properties, or to perform operations that are necessary when the object is being created.
+
