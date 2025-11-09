@@ -1,0 +1,260 @@
+class Person:
+  def __init__(self, fname, lname):
+    self.firstname = fname
+    self.lastname = lname
+
+  def printname(self):
+    print(self.firstname, self.lastname)
+
+class Student(Person):
+  pass
+
+x = Student("Mike", "Olsen")
+x.printname()#Mike Olsen
+
+-----------------------------------------
+
+class Person:
+  def __init__(self, fname, lname):
+    self.firstname = fname
+    self.lastname = lname
+
+  def printname(self):
+    print(self.firstname, self.lastname)
+
+class Student(Person):
+  def __init__(self, fname, lname):
+    super().__init__(fname, lname)
+    #Person.__init__(self, fname, lname)#ได้เหมือนกัน
+
+x = Student("Mike", "Olsen")
+x.printname()#Mike Olsen
+
+-----------------------------------------
+
+class Person:
+  def __init__(self, fname, lname):
+    self.firstname = fname
+    self.lastname = lname
+
+  def printname(self):
+    print(self.firstname, self.lastname)
+
+class Student(Person):
+  def __init__(self, fname, lname):
+    super().__init__(fname, lname)
+    self.graduationyear = 2019
+
+x = Student("Mike", "Olsen")
+print(x.graduationyear)#2019
+
+----------------------------------------
+
+class Person:
+  def __init__(self, fname, lname):
+    self.firstname = fname
+    self.lastname = lname
+
+  def printname(self):
+    print(self.firstname, self.lastname)
+
+class Student(Person):
+  def __init__(self, fname, lname, year):
+    super().__init__(fname, lname)
+    self.graduationyear = year
+
+x = Student("Mike", "Olsen", 2019)
+print(x.graduationyear)
+
+---------------------------------------
+
+class Person:
+  def __init__(self, fname, lname):
+    self.firstname = fname
+    self.lastname = lname
+
+  def printname(self):
+    print(self.firstname, self.lastname)
+
+class Student(Person):
+  def __init__(self, fname, lname, year):
+    super().__init__(fname, lname)
+    self.graduationyear = year
+
+  def welcome(self):
+    print("Welcome", self.firstname, self.lastname, "to the class of", self.graduationyear)
+
+x = Student("Mike", "Olsen", 2024)
+x.welcome()
+
+------------------------------------
+
+class Vehicle:
+  def __init__(self, brand, model):
+    self.brand = brand
+    self.model = model
+
+  def move(self):
+    print("Move!")
+
+class Car(Vehicle):
+  pass
+
+class Boat(Vehicle):
+  def move(self):
+    print("Sail!")
+
+class Plane(Vehicle):
+  def move(self):
+    print("Fly!")
+
+car1 = Car("Ford", "Mustang") #Create a Car object
+boat1 = Boat("Ibiza", "Touring 20") #Create a Boat object
+plane1 = Plane("Boeing", "747") #Create a Plane object
+
+for x in (car1, boat1, plane1):
+  print(x.brand)
+  print(x.model)
+  x.move()
+
+Ford
+Mustang
+Move! #เพราะ  class  Car  ไม่มี method  move  ของตัวเอง
+Ibiza
+Touring 20
+Sail!
+Boeing
+747
+Fly!
+------------------------------------
+
+class Outer:
+  def __init__(self):
+    self.name = "Emil"
+
+  class Inner:
+    def __init__(self, outer):
+      self.outer = outer
+
+    def display(self):
+      print(f"Outer class name: {self.outer.name}")
+
+outer = Outer()
+inner = outer.Inner(outer)
+inner.display()#Outer class name: Emil
+
+------------------------------------
+
+class Car:
+  def __init__(self, brand, model):
+    self.brand = brand
+    self.model = model
+    self.engine = self.Engine()
+
+  class Engine:
+    def __init__(self):
+      self.status = "Off"
+
+    def start(self):
+      self.status = "Running"
+      print("Engine started")
+
+    def stop(self):
+      self.status = "Off"
+      print("Engine stopped")
+
+  def drive(self):
+    if self.engine.status == "Running":
+      print(f"Driving the {self.brand} {self.model}")
+    else:
+      print("Start the engine first!")
+
+car = Car("Toyota", "Corolla")
+car.drive()
+car.engine.start()
+car.drive()
+
+Start the engine first!
+Engine started
+Driving the Toyota Corolla
+
+------------------------------------
+
+class Computer:
+  def __init__(self):
+    self.cpu = self.CPU()
+    self.ram = self.RAM()
+
+  class CPU:
+    def process(self):
+      print("Processing data...")
+
+  class RAM:
+    def store(self):
+      print("Storing data...")
+
+computer = Computer()
+computer.cpu.process()#Processing data...
+computer.ram.store()#Storing data...
+
+----------------------------------
+class Person:
+  def __init__(self, name, age):
+    self.name = name
+    self.__age = age # Private property
+
+p1 = Person("Emil", 25)
+print(p1.name)
+print(p1.__age) # This will cause an error
+
+----------------------------------
+
+class Student:
+  def __init__(self, name):
+    self.name = name
+    self.__grade = 0
+
+  def set_grade(self, grade):
+    if 0 <= grade <= 100:
+      self.__grade = grade
+    else:
+      print("Grade must be between 0 and 100")
+
+  def get_grade(self):
+    return self.__grade
+
+  def get_status(self):
+    if self.__grade >= 60:
+      return "Passed"
+    else:
+      return "Failed"
+
+student = Student("Emil")
+student.set_grade(85)
+print(student.get_grade())#85
+print(student.get_status())#Passed
+
+----------------------------------
+
+!!!!!!!!!!!!Private Methods
+
+class Calculator:
+  def __init__(self):
+    self.result = 0
+
+  def __validate(self, num):
+    if not isinstance(num, (int, float)):
+      return False
+    return True
+
+  def add(self, num):
+    if self.__validate(num):#call  private  method
+      self.result += num
+    else:
+      print("Invalid number")
+
+calc = Calculator()
+calc.add(10)
+calc.add(5)
+print(calc.result)
+# calc.__validate(5) # This would cause an error
