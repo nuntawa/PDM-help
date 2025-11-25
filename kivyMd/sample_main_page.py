@@ -19,69 +19,27 @@ class App(MDApp):
         self.title = "PDM Help"
 
         # Drawer
-        drawer = MDNavigationDrawer()
-        drawer.radius = (0, 0, 0, 0)
+        self.drawer = MDNavigationDrawer()
+        self.drawer.radius = (0, 0, 0, 0)
         list_view = MDList(pos_hint={"top":1}, size_hint=(1, 1))
 
-        item1 = OneLineListItem(text="item1")
-        item2 = OneLineListItem(text="item2")
+        item1 = OneLineListItem(text="item1",on_release=lambda x : self.change_screen('main') )
+        item2 = OneLineListItem(text="item2",on_release=lambda x : self.change_screen('second') )
 
         list_view.add_widget(item1)
         list_view.add_widget(item2)
 
-        drawer.add_widget(list_view)
+        self.drawer.add_widget(list_view)
 
-        # box = BoxLayout(orientation="vertical", padding=20, spacing=20)
-        # box.add_widget(MDLabel(text="Menu Item 1"))
-        # box.add_widget(MDLabel(text="Menu Item 2"))
-        # box.add_widget(MDLabel(text="Menu Item 3"))
-        # box.add_widget(MDLabel(text="Menu Item 3"))
-        # box.add_widget(MDLabel(text="Menu Item 3"))
-        # box.add_widget(MDLabel(text="Menu Item 3"))
-        # box.add_widget(MDLabel(text="Menu Item 3"))
-        # box.add_widget(MDLabel(text="Menu Item 3"))
-        # box.add_widget(MDLabel(text="Menu Item 3"))
-        # box.add_widget(MDLabel(text="Menu Item 3"))
-        # box.add_widget(MDLabel(text="Menu Item 3"))
-        # box.add_widget(MDLabel(text="Menu Item 3"))
-        # box.add_widget(MDLabel(text="Menu Item 3"))
-        # box.add_widget(MDLabel(text="Menu Item 3"))
-        # box.add_widget(MDLabel(text="Menu Item 3"))
-        # box.add_widget(MDLabel(text="Menu Item 3"))
-        # box.add_widget(MDLabel(text="Menu Item 3"))
-        # box.add_widget(MDLabel(text="Menu Item 3"))
-        # box.add_widget(MDLabel(text="Menu Item 3"))
-        # box.add_widget(MDLabel(text="Menu Item 3"))
-        # box.add_widget(MDLabel(text="Menu Item 3"))
-        # box.add_widget(MDLabel(text="Menu Item 3"))
-        # box.add_widget(MDLabel(text="Menu Item 3"))
-        # box.add_widget(MDLabel(text="Menu Item 3"))
-        # box.add_widget(MDLabel(text="Menu Item 3"))
-        # box.add_widget(MDLabel(text="Menu Item 3"))
-        # box.add_widget(MDLabel(text="Menu Item 3"))
-        # box.add_widget(MDLabel(text="Menu Item 3"))
-        # box.add_widget(MDLabel(text="Menu Item 3"))
-        # box.add_widget(MDLabel(text="Menu Item 3"))
-        # box.add_widget(MDLabel(text="Menu Item 3"))
-        # box.add_widget(MDLabel(text="Menu Item 3"))
-        # box.add_widget(MDLabel(text="Menu Item 3"))
-        # box.add_widget(MDLabel(text="Menu Item 3"))
-        # box.add_widget(MDLabel(text="Menu Item 3"))
-        # box.add_widget(MDLabel(text="Menu Item 3"))
-        # box.add_widget(MDLabel(text="Menu Item 3"))
-        # box.add_widget(MDLabel(text="Menu Item 3"))
-        # box.add_widget(MDLabel(text="Menu Item 3"))
-        # box.add_widget(MDLabel(text="Menu Item 9"))
-        # drawer.radius = (0, 0, 0, 0)
-        # drawer.add_widget(box)
 
         # Toolbar + content container
         layout = BoxLayout(orientation="vertical")
 
         toolbar = MDTopAppBar(
-            title="PDM Help",
-            left_action_items=[["menu", lambda x: drawer.set_state("toggle")]],
+            title="PDM Help       ",
+            left_action_items=[["menu", lambda x: self.drawer.set_state("toggle")]],
             elevation=0,
+            anchor_title="center"
         )
 
         layout.add_widget(toolbar)
@@ -94,18 +52,24 @@ class App(MDApp):
         )
         layout.add_widget(content)
 
-        screen = Screen(name="main")
+        screen = Screen(name="main")#ต้องกำหนด name ใฟ้กับ Screen
         screen.add_widget(layout)
 
+        screen_second = Screen(name="second")
+
         # ScreenManager
-        sm = ScreenManager()
-        sm.add_widget(screen)
+        self.sm = ScreenManager()
+        self.sm.add_widget(screen)
+        self.sm.add_widget(screen_second)
 
         # Add to root
-        root.add_widget(sm)
-        root.add_widget(drawer)
+        root.add_widget(self.sm)
+        root.add_widget(self.drawer)
 
         return root
 
+    def change_screen(self, screen_name):
+        self.sm.current = screen_name
+        self.drawer.set_state("close")
 
 App().run()
