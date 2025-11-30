@@ -10,6 +10,13 @@ from kivymd.uix.list import MDList,OneLineListItem
 
 Window.size = (1366, 768)
 
+class SecondScreen():
+
+    def __init__(self ):
+        self.screen_second = Screen(name="second")
+
+    def renderScreen(self):
+        return self.screen_second
 
 class App(MDApp):
 
@@ -55,12 +62,12 @@ class App(MDApp):
         screen = Screen(name="main")#ต้องกำหนด name ใฟ้กับ Screen
         screen.add_widget(layout)
 
-        screen_second = Screen(name="second")
+        #screen_second = Screen(name="second")#ย้ายไปอยู่ใน  class
 
         # ScreenManager
         self.sm = ScreenManager()
         self.sm.add_widget(screen)
-        self.sm.add_widget(screen_second)
+        self.sm.add_widget(SecondScreen().renderScreen())
 
         # Add to root
         root.add_widget(self.sm)
