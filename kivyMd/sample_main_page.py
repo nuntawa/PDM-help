@@ -1,6 +1,7 @@
 from kivymd.app import MDApp
 from kivy.core.window import Window
 from kivymd.uix.screenmanager import ScreenManager
+from kivy.uix.screenmanager import FadeTransition
 from kivymd.uix.screen import Screen
 from kivy.uix.boxlayout import BoxLayout
 from kivymd.uix.label import MDLabel
@@ -10,10 +11,34 @@ from kivymd.uix.list import MDList,OneLineListItem
 
 Window.size = (1366, 768)
 
+class MasterAppBar():
+    def __init__(self,drawer):
+       
+        #init TopAppBar
+        self.toolbar = MDTopAppBar(
+            title="PDM Help       ",
+            left_action_items=[["menu", lambda x: drawer.set_state("toggle")]],
+            elevation=0,#ไม่มีเงา
+            anchor_title="center"
+        )
+       
+    def renderTopAppBar(self):
+        return self.toolbar
+
+
 class SecondScreen():
 
-    def __init__(self ):
+    def __init__(self,topAppBar):
         self.screen_second = Screen(name="second")
+        layout = BoxLayout(orientation="vertical")
+        layout.add_widget(topAppBar)
+        content = MDLabel(
+            text="Second Page",
+            halign="center",
+            pos_hint={"center_y": 0.5},
+        )
+        layout.add_widget(content)
+        self.screen_second.add_widget(layout)
 
     def renderScreen(self):
         return self.screen_second
@@ -38,18 +63,12 @@ class App(MDApp):
 
         self.drawer.add_widget(list_view)
 
-
         # Toolbar + content container
         layout = BoxLayout(orientation="vertical")
 
-        toolbar = MDTopAppBar(
-            title="PDM Help       ",
-            left_action_items=[["menu", lambda x: self.drawer.set_state("toggle")]],
-            elevation=0,
-            anchor_title="center"
-        )
-
-        layout.add_widget(toolbar)
+        masterAppBar = MasterAppBar(self.drawer)
+        topAppBar = masterAppBar.renderTopAppBar()
+        layout.add_widget(topAppBar)
 
         # Main content
         content = MDLabel(
@@ -65,13 +84,16 @@ class App(MDApp):
         #screen_second = Screen(name="second")#ย้ายไปอยู่ใน  class
 
         # ScreenManager
-        self.sm = ScreenManager()
+        # self.sm = ScreenManager(transition=FadeTransition(duration=0.1)) #default  จะเป็น  slide transition
+        self.sm = ScreenManager() #default  จะเป็น  slide transition
         self.sm.add_widget(screen)
-        self.sm.add_widget(SecondScreen().renderScreen())
+        self.sm.add_widget(SecondScreen(MasterAppBar(self.drawer).renderTopAppBar()).renderScreen())
 
         # Add to root
         root.add_widget(self.sm)
         root.add_widget(self.drawer)
+        
+        
 
         return root
 
