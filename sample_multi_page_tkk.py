@@ -1,6 +1,9 @@
-import tkinter as tk
+# import tkinter as tk
+import ttkbootstrap as ttk
+from ttkbootstrap.constants import *
 
-root = tk.Tk()
+# root = tk.Tk()
+root = ttk.Window(themename="united")
 root.geometry("600x500")
 
 frames = {}
@@ -8,25 +11,25 @@ frames = {}
 def show(route):
     frames[route].tkraise()
 
-container = tk.Frame(root)
+container = ttk.Frame(root)
 # container.pack(fill="both", expand=True)
 container.grid(row=1, column=0, sticky="nsew")
 
 # ---------- Home ----------
-home = tk.Frame(container)
+home = ttk.Frame(container)
 home.grid(row=0, column=0, sticky="nsew")
 
 #----- เพิ่ม  widget  เข้าไปใน  Home
-tk.Label(home, text="Home Page", font=("Arial", 18)).pack(pady=20)
-tk.Button(home, text="Go to Profile", command=lambda: show("profile")).pack()
+ttk.Label(home, text="Home Page", font=("Arial", 18)).pack(pady=20)
+ttk.Button(home, text="Go to Profile", command=lambda: show("profile")).pack()
 
 # ---------- Profile ----------
-profile = tk.Frame(container)
+profile = ttk.Frame(container)
 profile.grid(row=0, column=0, sticky="nsew")
 
 #----- เพิ่ม  widget  เข้าไปใน  profile
-tk.Label(profile, text="Profile Page", font=("Arial", 18)).pack(pady=20)
-tk.Button(profile, text="Back to Home", command=lambda: show("home")).pack()
+ttk.Label(profile, text="Profile Page", font=("Arial", 18)).pack(pady=20)
+ttk.Button(profile, text="Back to Home", command=lambda: show("home")).pack()
 
 #----- ใส่ frame เข้าไปใน  dictionary
 frames["home"] = home
