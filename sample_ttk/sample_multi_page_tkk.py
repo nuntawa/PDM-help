@@ -4,8 +4,29 @@ from ttkbootstrap.constants import *
 from pages.home import Home #แยกเป็นหน้าย่อย
 
 # root = tk.Tk()
-root = ttk.Window(themename="united")
-root.geometry("600x500")
+root = ttk.Window(title="PDM Help",themename="united")
+root.geometry("800x700")
+
+#เมนู bar
+menu_bar = ttk.Menu(root)
+
+#Group ของเมนู
+layout_menu = ttk.Menu(menu_bar,tearoff=0)
+layout_menu.add_command(label = "หน้าแม่",command=lambda:print("หน้าแม่"))
+layout_menu.add_command(label = "Tab มี Card",command=lambda:print("Tab มี card"))
+layout_menu.add_command(label = "Card มี Tab",command=lambda:print("Card มี Tab"))
+
+#component เมนู
+component_menu = ttk.Menu(menu_bar,tearoff=0)
+component_menu.add_command(label = "grid",command=lambda:print("grid"))
+component_menu.add_command(label = "dropdown",command=lambda:print("dropdown"))
+component_menu.add_command(label = "button",command=lambda:print("button"))
+
+#เพิ่มเข้าไปในเมนู bar  ด้านบน
+menu_bar.add_cascade(label="Layout",menu=layout_menu)
+menu_bar.add_cascade(label="component",menu=component_menu)
+
+root.config(menu=menu_bar)
 
 frames = {}
 
