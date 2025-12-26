@@ -7,6 +7,8 @@ from ttkbootstrap.scrolled import ScrolledFrame
 # root = tk.Tk()
 root = ttk.Window(title="PDM Help",themename="united")
 root.geometry("900x650")
+# root.grid_rowconfigure(0, weight=1)
+# root.grid_columnconfigure(0, weight=1)
 
 #เมนู bar
 menu_bar = ttk.Menu(root)
@@ -35,12 +37,14 @@ def show(route):
     frames[route].tkraise()
 
 container = ttk.Frame(root)
+container.pack(fill="both", expand=True)
 # container = ScrolledFrame(root,autohide=True)
 # container.pack(fill="both", expand=True)
 # container.grid(row=0, column=0, sticky="nsew")
-container.pack(fill="both", expand=True)
-
-
+# container.pack(fill="both", expand=True)
+ #Responsive layout
+# container.grid_columnconfigure(0, weight=1)
+# container.grid_rowconfigure(0, weight=1)
 
 # # ---------- Home ----------
 # home = ttk.Frame(container)
