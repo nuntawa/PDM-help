@@ -2,11 +2,10 @@
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
 from pages.home import Home #แยกเป็นหน้าย่อย
-from ttkbootstrap.scrolled import ScrolledFrame
 
 # root = tk.Tk()
 root = ttk.Window(title="PDM Help",themename="united")
-root.geometry("900x650")
+root.geometry("800x700")
 
 #เมนู bar
 menu_bar = ttk.Menu(root)
@@ -35,12 +34,8 @@ def show(route):
     frames[route].tkraise()
 
 container = ttk.Frame(root)
-# container = ScrolledFrame(root,autohide=True)
 # container.pack(fill="both", expand=True)
-# container.grid(row=0, column=0, sticky="nsew")
-container.pack(fill="both", expand=True)
-
-
+container.grid(row=1, column=0, sticky="nsew")
 
 # # ---------- Home ----------
 # home = ttk.Frame(container)
@@ -64,7 +59,7 @@ ttk.Button(profile, text="Back to Home", command=lambda: show("home")).pack()
 frames["home"] = home
 frames["profile"] = profile
 
-show("profile")#แสดง frame  home เป็นอันแรก
+show("home")#แสดง frame  home เป็นอันแรก
 
 #ให้อยู่บนสุดเสมอ
 root.attributes('-topmost', True)
