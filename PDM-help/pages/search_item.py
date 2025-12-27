@@ -23,6 +23,19 @@ def SearchItem(container,frames):
     ttk.Label(page,text="ref",bootstyle="primary",font=("Arial", 12)).grid(row=0,column=1,sticky="nw",padx=10,pady=10)
     ttk.Entry(page).grid(row=0,column=1,sticky="new",padx=10,pady=35)
     
+    ttk.Label(page,text="isRequired",bootstyle="primary",font=("Arial", 12)).grid(row=0,column=2,sticky="nw",padx=10,pady=10)
+    is_required_select = ttk.StringVar()
+    is_required = ttk.Combobox(page,text="isRequired",textvariable=is_required_select)
+    is_required["values"] = ["true","false"]
+    is_required.grid(row=0,column=2,sticky="new",padx=10,pady=35)
+    is_required.bind("<<ComboboxSelected>>", lambda e :is_required.selection_clear())
+    is_required.set("true")
+    
+    # is_required = ttk.StringVar(page)
+    # is_required.set("true")
+    # ttk.OptionMenu(page,is_required,"true","false").grid(row=0,column=2,sticky="new",padx=10,pady=35)
+
+
 
     st = ScrolledText(page, autohide=True)
     st.insert(END, 'Insert your text here.')
