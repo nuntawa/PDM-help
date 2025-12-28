@@ -14,32 +14,55 @@ def SearchItem(container,frames):
     page.rowconfigure(1,weight=1) 
     page.rowconfigure(2,weight=1) 
     page.rowconfigure(3,weight=1) 
+    page.rowconfigure(4,weight=1) 
     page.grid(row=0,column=0)
 
+    ttk.Label(page,text="Label",bootstyle="primary",font=("Arial", 12)).grid(row=0,column=0,sticky="nw",padx=10,pady=10)
+    label_txt = ttk.Entry(page)
+    label_txt.grid(row=0,column=0,sticky="new",padx=10,pady=35)
+    label_txt.delete(0,END)
+    label_txt.insert(END,"ItemBasic.itemId")
+
+    ttk.Label(page,text="v-model",bootstyle="primary",font=("Arial", 12)).grid(row=0,column=1,sticky="nw",padx=10,pady=10)
+    v_modell_txt = ttk.Entry(page)
+    v_modell_txt.grid(row=0,column=1,sticky="new",padx=10,pady=35)
+    v_modell_txt.delete(0, END) 
+    v_modell_txt.insert(END, 'itemObj')
+
+    ttk.Label(page,text="ref",bootstyle="primary",font=("Arial", 12)).grid(row=0,column=2,sticky="nw",padx=10,pady=10)
+    ref_txt = ttk.Entry(page)
+    ref_txt.grid(row=0,column=2,sticky="new",padx=10,pady=35)
+    ref_txt.delete(0,END)
+    ref_txt.insert(END,"SearchItemRef")
     
-    ttk.Label(page,text="v-model",bootstyle="primary",font=("Arial", 12)).grid(row=0,column=0,sticky="nw",padx=10,pady=10)
-    ttk.Entry(page).grid(row=0,column=0,sticky="new",padx=10,pady=35)
+    ttk.Label(page,text="isRequired",bootstyle="primary",font=("Arial", 12)).grid(row=0,column=3,sticky="nw",padx=10,pady=10)
+    is_required_select = ttk.Combobox(page)
+    is_required_select["values"] = ["true","false"]
+    is_required_select.grid(row=0,column=3,sticky="new",padx=10,pady=35)
+    is_required_select.bind("<<ComboboxSelected>>", lambda e :is_required_select.selection_clear())
+    is_required_select.set("true")
 
-    ttk.Label(page,text="ref",bootstyle="primary",font=("Arial", 12)).grid(row=0,column=1,sticky="nw",padx=10,pady=10)
-    ttk.Entry(page).grid(row=0,column=1,sticky="new",padx=10,pady=35)
-    
-    ttk.Label(page,text="isRequired",bootstyle="primary",font=("Arial", 12)).grid(row=0,column=2,sticky="nw",padx=10,pady=10)
-    is_required_select = ttk.StringVar()
-    is_required = ttk.Combobox(page,text="isRequired",textvariable=is_required_select)
-    is_required["values"] = ["true","false"]
-    is_required.grid(row=0,column=2,sticky="new",padx=10,pady=35)
-    is_required.bind("<<ComboboxSelected>>", lambda e :is_required.selection_clear())
-    is_required.set("true")
-    
-    # is_required = ttk.StringVar(page)
-    # is_required.set("true")
-    # ttk.OptionMenu(page,is_required,"true","false").grid(row=0,column=2,sticky="new",padx=10,pady=35)
+    ttk.Label(page,text="isUserPermission",bootstyle="primary",font=("Arial",12)).grid(row=1,column=0,sticky="nw",padx=10,pady=10)
+    is_user_permission_select = ttk.Combobox(page)
+    is_user_permission_select["values"] = ["true","false"]
+    is_user_permission_select.grid(row=1,column=0,sticky="new",padx=10,pady=35)
+    is_user_permission_select.bind("<<ComboboxSelected>>", lambda e :is_user_permission_select.selection_clear())
+    is_user_permission_select.set("true")
 
+    ttk.Label(page,text="companyId",bootstyle="primary",font=("Arial",12)).grid(row=1,column=1,sticky="new",padx=10,pady=10)
+    company_id_txt = ttk.Entry(page)
+    company_id_txt.grid(row=1,column=1,sticky="new",padx=10,pady=35)
+    company_id_txt.delete(0,END)
+    company_id_txt.insert(END,"route.params.companyId")
 
+    gen_btn = ttk.Button(page,text="Generate Code",takefocus=False,bootstyle=PRIMARY,command= lambda: print('Generate Code'))
+    gen_btn.grid(row=1,column=2,sticky="new",padx=10,pady=35)
 
-    st = ScrolledText(page, autohide=True)
-    st.insert(END, 'Insert your text here.')
-    st.grid(row=2,column=0,columnspan=5,rowspan=2,padx=5,pady=5,sticky="nsew")
+    ttk.Label(page,text="Code",bootstyle="primary",font=("Arial",12)).grid(row=3,column=0,sticky="nw",padx=10,pady=10)    
+    code = ScrolledText(page, autohide=True)
+    code.delete('0.0', END)
+    code.insert(END, '')#เพิ่มข้อความเข้าไปใน Scrool text area
+    code.grid(row=3,column=0,columnspan=4,rowspan=2,padx=5,pady=5,sticky="sew")
 
     return page
     
