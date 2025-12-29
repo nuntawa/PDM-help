@@ -58,11 +58,17 @@ def SearchItem(container,frames):
     gen_btn = ttk.Button(page,text="Generate Code",takefocus=False,bootstyle=PRIMARY,command= lambda: print('Generate Code'))
     gen_btn.grid(row=1,column=2,sticky="new",padx=10,pady=35)
 
+    # ttk.Label(page,text="Import",bootstyle="primary",font=("Arial",12)).grid(row=2,column=0,sticky="nw",padx=10,pady=10)
+    # import_txt_area = ScrolledText(page, autohide=True)
+    # import_txt_area.delete('0.0', END)
+    # import_txt_area.insert(END, '')#เพิ่มข้อความเข้าไปใน Scrool text area
+    # import_txt_area.grid(row=2,column=0,columnspan=4,padx=5,pady=5,sticky="sew")
+
     ttk.Label(page,text="Code",bootstyle="primary",font=("Arial",12)).grid(row=3,column=0,sticky="nw",padx=10,pady=10)    
     code = ScrolledText(page, autohide=True)
     code.delete('0.0', END)
     code.insert(END, '')#เพิ่มข้อความเข้าไปใน Scrool text area
-    code.grid(row=3,column=0,columnspan=4,rowspan=2,padx=5,pady=5,sticky="sew")
+    code.grid(row=3,column=0,rowspan=2,columnspan=4,padx=5,pady=5,sticky="sew")
 
     return page
     
