@@ -5,6 +5,10 @@ def main(page: ft.Page):
     page.window_width = 500
     page.window_height = 400
 
+    def open_drawer():
+        page.drawer.open = True
+        page.update()
+
     # 🧭 Navigation: handle routing
     def route_change(e: ft.RouteChangeEvent):
         page.views.clear()  # remove all existing views
@@ -27,8 +31,8 @@ def main(page: ft.Page):
         return ft.View(
             "/",
             [
-                # ft.AppBar(title=ft.Text("🏠 Home Page"), bgcolor=ft.colors.SURFACE_VARIANT),
-                ft.AppBar(title=ft.Text("🏠 Home Page") ),
+                
+               
                 ft.Text("Welcome to the home page!", size=20),
                 ft.ElevatedButton("Go to Settings", on_click=lambda _: page.go("/settings")),
                 ft.ElevatedButton("About", on_click=lambda _: page.go("/about")),
@@ -40,8 +44,8 @@ def main(page: ft.Page):
         return ft.View(
             "/settings",
             [
-                # ft.AppBar(title=ft.Text("⚙️ Settings"), bgcolor=ft.colors.SURFACE_VARIANT),
-                ft.AppBar(title=ft.Text("⚙️ Settings")),
+                
+                # ft.AppBar(title=ft.Text("⚙️ Settings")),
                 ft.Text("This is the settings page.", size=18),
                 ft.ElevatedButton("Back", on_click=lambda _: page.go("/")),
             ],
@@ -52,19 +56,33 @@ def main(page: ft.Page):
         return ft.View(
             "/about",
             [
-                # ft.AppBar(title=ft.Text("ℹ️ About"), bgcolor=ft.colors.SURFACE_VARIANT),
-                ft.AppBar(title=ft.Text("ℹ️ About")),
+                
+                # ft.AppBar(title=ft.Text("ℹ️ About")),
                 ft.Text("Multi-page Flet desktop app example.", size=18),
                 ft.ElevatedButton("Back to Home", on_click=lambda _: page.go("/")),
             ],
         )
 
-    # Bind routing handlers
-    page.on_route_change = route_change
-    page.on_view_pop = view_pop
 
-    # Start app at home
-    page.go("/")
+    page.drawer = ft.NavigationDrawer(
+        controls=[
+            ft.ListTile(title=ft.Text("Home"), on_click=lambda e: page.go("/")),
+            ft.ListTile(title=ft.Text("Settings"), on_click=lambda e: page.go("/settings")),
+            ft.ListTile(title=ft.Text("About"), on_click=lambda e: page.go("/about")),
+        ],
+    )
+    # page.add(page.drawer)
+    page.AppBar = ft.AppBar(title=ft.Text("🏠 Home Page") , bgcolor=ft.Colors.SURFACE_CONTAINER_HIGHEST,leading=ft.IconButton(
+                    icon=ft.Icons.MENU,
+                    on_click=lambda e: open_drawer()
+                ), ),
+
+    # Bind routing handlers
+    # page.on_route_change = route_change
+    # page.on_view_pop = view_pop
+
+    # # Start app at home
+    # page.go("/")
 
 
 ft.app(target=main)
