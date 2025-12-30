@@ -1,0 +1,10 @@
+วิธี install
+
+python -m venv env ( รอนาน )
+env\Scripts\activate
+pip install flet==0.28.3
+
+วิธี run
+
+env\Scripts\activate
+python main.py (  ครั้งแรกอาจรอนาน )
