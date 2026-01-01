@@ -24,6 +24,8 @@ def search_item_page_render(page):
         if is_required_drop_down.value == "true":
             required_tag = "<small class=\"font-red\"> * </small>"
 
+
+        #สรา้ง Element
         output_str = f"<label>{{{{ t("+label_field.value+f") }}}} {required_tag} </label>\n" #ต้องใช้ {{{{  4 ตัว สำหรับ {{ ใน vue 
         output_str = output_str + f"<SearchItemPDM\n"
         output_str = output_str + f"    ref=\"{ref_field.value}\" \n"
@@ -31,7 +33,13 @@ def search_item_page_render(page):
         output_str = output_str + f"    :isRequired=\"{is_required_drop_down.value}\" \n"
         output_str = output_str + f"    :isUserPermission=\"{is_user_permission_drop_down.value}\" \n"
         output_str = output_str + f"    :companyId=\"{company_id_field.value}\" \n"
-        output_str = output_str + f"/>"
+        output_str = output_str + f"/>\n"
+
+        #สรา้งตัวแปร
+        output_str = output_str + f"<!--------------<script setup>-------------->\n"
+        output_str = output_str + f"const {ref_field.value} = ref();\n"
+        output_str = output_str + f"const {v_model_field.value} = ref();\n"
+
         output_field.value = output_str
         page.update()
 
