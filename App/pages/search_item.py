@@ -19,9 +19,18 @@ def search_item_page_render(page):
         import_str = """import SearchItemPDM from "@/components/middle/SearchItem/search-itemPDM.vue";"""
         import_field.value = import_str
 
-        output_str = f"<label>{{{{t("+label_field.value+f")}}}}</label>\n"
+        #เพิ่ม  tag required ( ดอกจันทร์แดง )
+        required_tag = ""
+        if is_required_drop_down.value == "true":
+            required_tag = "<small class=\"font-red\"> * </small>"
+
+        output_str = f"<label>{{{{ t("+label_field.value+f") }}}} {required_tag} </label>\n" #ต้องใช้ {{{{  4 ตัว สำหรับ {{ ใน vue 
         output_str = output_str + f"<SearchItemPDM\n"
-        output_str = output_str + f"    ref=\n"
+        output_str = output_str + f"    ref=\"{ref_field.value}\" \n"
+        output_str = output_str + f"    v-model=\"{v_model_field.value}\" \n"
+        output_str = output_str + f"    :isRequired=\"{is_required_drop_down.value}\" \n"
+        output_str = output_str + f"    :isUserPermission=\"{is_user_permission_drop_down.value}\" \n"
+        output_str = output_str + f"    :companyId=\"{company_id_field.value}\" \n"
         output_str = output_str + f"/>"
         output_field.value = output_str
         page.update()
