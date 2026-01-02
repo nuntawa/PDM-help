@@ -164,7 +164,7 @@ const fetchData = async ()=>{
     #Text Field ที่แสดง code output
     output_field = ft.TextField(label="Code",value=" ",expand=True,multiline=True,min_lines=10,border_color="blue")
 
-    row_1 = ft.Row(controls=[ft.Text("หน้าแม่",size=20)])
+    row_1 = ft.Row(controls=[ft.Text("หน้าแม่",size=15)])
     row_2 = ft.Row(controls=[program_code_field,program_name_field,module_dropdown,gen_btn])
     row_3 = ft.Row(controls=[output_field])
 

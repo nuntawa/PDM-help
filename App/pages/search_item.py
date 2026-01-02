@@ -44,7 +44,7 @@ def search_item_page_render(page):
         page.update()
 
 
-    header_txt = ft.Text("Search Item", size=20)
+    header_txt = ft.Text("Search Item", size=15)
     label_field = ft.TextField(label="Label *",value="ItemBasic.itemId")
     ref_field = ft.TextField(label="Ref *",value="SearchItemRef")
     v_model_field = ft.TextField(label="v-model *",value="itemObj")
