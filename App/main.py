@@ -28,18 +28,12 @@ def main(page: ft.Page):
     def show_hide_menu(e):
         # print("show hide menu")
         menu_column.controls.clear()
-        if menu_group_select_dropdown.value == "layout":
-            menu_column.controls.append(
-                ft.ListTile(title=ft.Text("หน้าแม่"), on_click=lambda e:change_page("mother_page")),
-            )
-        elif menu_group_select_dropdown.value == "component":
-            menu_column.controls.append(
-                ft.ListTile(title=ft.Text("Search Item"), on_click=lambda e:change_page("search_item_page")),
-            )
-            menu_column.controls.append(
-                ft.ListTile(title=ft.Text("Dropdown"), on_click=lambda e:change_page("dropdown_page")),
-            )
 
+        for menu_item in menu_list:
+            if menu_item["group"] == menu_group_select_dropdown.value:
+                menu_column.controls.append(
+                    ft.ListTile(title=ft.Text(menu_item["name"]), on_click=lambda _e, page=menu_item["page"]: change_page(page)),
+                )
         page.update()     
     #######################################################################    
 
