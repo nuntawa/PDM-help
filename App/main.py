@@ -1,6 +1,7 @@
 import flet as ft
 from pages.mother_page import mother_page_render
 from pages.search_item import search_item_page_render
+from pages.dropdown_page import dropdown_page_render
 
 def main(page: ft.Page):
     page.title = "PDM"
@@ -34,6 +35,9 @@ def main(page: ft.Page):
             menu_column.controls.append(
                 ft.ListTile(title=ft.Text("Search Item"), on_click=lambda e:change_page("search_item_page")),
             )
+            menu_column.controls.append(
+                ft.ListTile(title=ft.Text("Dropdown"), on_click=lambda e:change_page("dropdown_page")),
+            )
 
         page.update()     
     #######################################################################    
@@ -62,6 +66,9 @@ def main(page: ft.Page):
     menu_column.controls.append(
         ft.ListTile(title=ft.Text("Search Item"), on_click=lambda e:change_page("search_item_page")),
     )
+    menu_column.controls.append(
+        ft.ListTile(title=ft.Text("Dropdown"), on_click=lambda e:change_page("dropdown_page")),
+    )
     
     drawer = ft.NavigationDrawer(
         controls=[
@@ -72,11 +79,13 @@ def main(page: ft.Page):
     
     mother_page = mother_page_render(page)
     search_item_page = search_item_page_render(page)
+    dropdown_page = dropdown_page_render(page)
 
     #เก็บหน้าต่างๆ
     page_list={
         "mother_page":mother_page,
-        "search_item_page":search_item_page
+        "search_item_page":search_item_page,
+        "dropdown_page":dropdown_page
     }
 
     page.add(page_list["mother_page"])
