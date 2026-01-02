@@ -32,22 +32,27 @@ def button_page_render(page):
                 content_end = True
             else:
                 output_str = output_str + f"    <ButtonPDM\n"
+                output_str = output_str + f"         :buttonText='"+btn_type+"'\n"
 
+                if btn_type == "Search" or btn_type == "Add" or btn_type == "Set" :
+                    output_str = output_str + f"     :cssButton=\"'bg-blue'\"\n"
+                if btn_type == "Clear" :
+                    output_str = output_str + f"     :cssButton=\"'font-black'\"\n"
+                if btn_type == "Save"  :
+                    output_str = output_str + f"     :cssButton=\"'bg-green'\"\n"
+                    output_str = output_str + f"     :disabled=\"!permissionEdit\"\n"    
+                if btn_type == "Report" or btn_type == "Generate" :
+                    output_str = output_str + f"     :cssButton=\"'bg-back'\"\n"
+                    output_str = output_str + f"     :disabled=\"!permissionReport\"\n"
 
                 output_str = output_str + f"         :onClick=\"()=>{{ ... }}\"\n"
+                output_str = output_str + f"         :styleInline=\"''\"\n"
                 output_str = output_str + f"    />\n\n"
         #end for
 
         if content_end:
             output_str = output_str + f"</div>"
 
-        # output_str = f"<ButtonPDM\n"
-        # output_str = output_str + f"    type=\"{button_type_dropdown.value}\"\n"
-        # output_str = output_str + f"/>\n"
-
-        # # output_field.value = output_str
-
-        #<div class="flex justify-content-end"></div>
         output_field.value = output_str
         page.update()
 
@@ -58,12 +63,14 @@ def button_page_render(page):
     #ตัวเลือกประเภทปุ่ม
     options = [
         ("ปุ่มด้านล่าง", "content-end"),
-        ("Search", "search"),
-        ("Save", "save"),
-        ("Delete", "delete"),
-        ("Clear", "clear"),
-        ("Report", "report"),
-        ("Generate", "generate"),
+        ("Search", "Search"),
+        ("Save", "Save"),
+        ("Add", "Add"),
+        ("Set", "Set"),
+        # ("Delete", "Delete"),
+        ("Clear", "Clear"),
+        ("Report", "Report"),
+        ("Generate", "Generate"),
     ]
 
     checkboxes = []
