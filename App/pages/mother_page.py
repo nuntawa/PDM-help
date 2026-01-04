@@ -37,6 +37,13 @@ def mother_page_render(page):
             :notFoundMessage="'' /* ข้อความที่ต้องการให้แสดงถ้าไม่พบ compnay เพราะในหน้า  form  จะเป็น error  เรื่องสิทธิ ( ถ้าเป็นค่าว่างจะยึดตาม error ( responseCode , responseMessage ) ของ getCompanyInfo  ) */"
             />
 
+        <!--<หน้าลูก
+                  ref="ชื่อref"
+                  v-if="dataFromAPI"
+                  :dataFromAPI="dataFromAPI"
+                  :ShowErrorOrSuccessRef="ShowErrorOrSuccessRef"
+        />-->
+
     </div>
 </template>
 <script setup>
@@ -60,6 +67,8 @@ const { t } = useI18n();
 const programCode = ref(\""""+program_code_field.value+"""\");
 const programType = ref(\""""+module_dropdown.value+"""\");
 const programName = ref(\""""+program_name_field.value+"""\");
+
+const dataFromAPI = ref(null);
 
 const permissionAdd = ref(
   // SettingService.checkActionProgram(program.value, "CREATE")
