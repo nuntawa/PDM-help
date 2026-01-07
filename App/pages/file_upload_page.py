@@ -91,7 +91,7 @@ def file_upload_page_render(page):
 
     ref_text_field = ft.TextField(label="ref *",value="UploadRef")
     v_model_text_field = ft.TextField(label="v-model:fileValue *",value="currentFile")
-    uploader_text_field = ft.TextField(label="@uploader *",value="onUploadLocation")#ชื่อ Function ที่ทำงานเมื่อ  upload
+    uploader_text_field = ft.TextField(label="@uploader *",value="onUpload")#ชื่อ Function ที่ทำงานเมื่อ  upload
     validateBeforeUpload_text_field = ft.TextField(label="validateBeforeUploa *",value="...เงื่อนไข ปุ่ม upload enabled... ? true : false")
 
     row_2 = ft.Row(controls=[

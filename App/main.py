@@ -4,6 +4,7 @@ from pages.search_item import search_item_page_render
 from pages.dropdown_page import dropdown_page_render
 from pages.button_page import button_page_render
 from pages.file_upload_page import file_upload_page_render
+from pages.card_has_tap import card_has_tab_render
 
 def main(page: ft.Page):
     page.title = "PDM"
@@ -60,6 +61,7 @@ def main(page: ft.Page):
     #array ที่เป็น dictionary เก็บเมนูทั้งหมด
     menu_list = [
         {"group":"layout","name":"หน้าแม่","page":"mother_page"},
+        {"group":"layout","name":"Card มี  Tab","page":"card_has_tab_page"},
         {"group":"component","name":"Search Item","page":"search_item_page"},
         {"group":"component","name":"Dropdown","page":"dropdown_page"},
         {"group":"component","name":"Button","page":"button_page"},
@@ -85,6 +87,7 @@ def main(page: ft.Page):
     search_item_page = search_item_page_render(page)
     dropdown_page = dropdown_page_render(page)
     file_upload_page = file_upload_page_render(page)
+    card_has_tab_page = card_has_tab_render(page)
 
     #เก็บหน้าต่างๆ
     page_list={
@@ -92,7 +95,8 @@ def main(page: ft.Page):
         "search_item_page":search_item_page,
         "dropdown_page":dropdown_page,
         "button_page":button_page,
-        "file_upload_page":file_upload_page
+        "file_upload_page":file_upload_page,
+        "card_has_tab_page":card_has_tab_page
     }
 
     def show_error(title,text):
