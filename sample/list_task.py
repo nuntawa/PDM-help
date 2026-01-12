@@ -49,7 +49,7 @@ def main(page):
          options=[ 
             ft.dropdown.Option(text="เลือกประเภทหน้าลูก", key="default",disabled=True),
             ft.dropdown.Option(text="critiria", key="critiria"),
-            ft.dropdown.Option(text="ตาราง", key="critiria")
+            ft.dropdown.Option(text="ตาราง", key="ตาราง")
         ],
         width=200
     )
