@@ -29,7 +29,9 @@ def main(page):
                 ft.dropdown.Option(text="เลือกประเภท Tab", key="default",disabled=True),
                 ft.dropdown.Option(text="Maintenance", key="Maintenance"),
                 ft.dropdown.Option(text="Upload", key="Upload"),
-                ft.dropdown.Option(text="Add Item", key="Add Item")
+                ft.dropdown.Option(text="Add", key="Add"),
+                ft.dropdown.Option(text="Edit", key="Edit"),
+                ft.dropdown.Option(text="Delete", key="Delete")
             ],
             width=180
         )
@@ -73,7 +75,8 @@ def main(page):
     
     def gen_out_put(e):#function  สร้าง output
 
-        out_put = out_put_field.value
+        # out_put = out_put_field.value
+        out_put = ""
         flag = 0
 
         if tab_drop_down.value != "default" :
@@ -102,7 +105,7 @@ def main(page):
         out_put_field.value = out_put
 
         page.update()#ต้องมี  Update  ด้วย
-        clear_input(None)
+        # clear_input(None)
 
     gen_btn =  ft.FilledButton(text="Generate",style=ft.ButtonStyle(
                 shape=ft.RoundedRectangleBorder(radius=10),
@@ -114,6 +117,7 @@ def main(page):
         page_type_drop_down.value = "default"
         child_type_drop_down.value = "default"
         function_drop_down.value = "default"
+        out_put_field.value =""
         page.update()#ต้องมี  Update  ด้วย
         
 
