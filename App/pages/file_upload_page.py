@@ -54,6 +54,8 @@ def file_upload_page_render(page):
 
                     const data = {
                        //json ส่งข้อมูลให้  API
+                       "companyId" : route.params.companyId,
+                       "userId" :  sessionStorage.getItem("userId"),
                     };
                     // Call API
                     const resUpload = await Object.uploadMethod(e,data);
