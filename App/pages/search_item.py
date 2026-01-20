@@ -26,7 +26,7 @@ def search_item_page_render(page):
 
 
         #สรา้ง Element
-        output_str = f"<label>{{{{ t("+label_field.value+f") }}}} {required_tag} </label>\n" #ต้องใช้ {{{{  4 ตัว สำหรับ {{ ใน vue 
+        output_str = f"<label>{{{{ t('"+label_field.value+f"') }}}} {required_tag} </label>\n" #ต้องใช้ {{{{  4 ตัว สำหรับ {{ ใน vue 
         output_str = output_str + f"<SearchItemPDM\n"
         output_str = output_str + f"    ref=\"{ref_field.value}\" \n"
         output_str = output_str + f"    v-model=\"{v_model_field.value}\" \n"

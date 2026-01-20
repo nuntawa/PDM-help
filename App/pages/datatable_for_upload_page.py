@@ -214,7 +214,15 @@ defineExpose({
         ],value="left",expand=True)
         
         form = ft.Column(controls=[header_txt_field,field_txt_field,width_txt_field,sortable_drop_down,align_drop_down,error_display := ft.Text("",color="RED")])
-    
+        
+        if row_data is not None:
+            #กรณีแก้ไข เอาข้อมูลเดิมมาใส่ในฟอร์ม
+            header_txt_field.value = row_data['header']
+            field_txt_field.value = row_data['field']
+            width_txt_field.value = row_data['width']
+            sortable_drop_down.value = row_data['sortable']
+            align_drop_down.value = row_data['align']
+        
         def save_form(e):
             if header_txt_field.value.strip() == "" or field_txt_field.value.strip() == "" or width_txt_field.value.strip() == "":
                 error_display.value = "Please input all required element *"
@@ -227,7 +235,11 @@ defineExpose({
 
             if row_data is not None:
                 #กรณีแก้ไข
-                pass
+                row_data['header'] = header_txt_field.value
+                row_data['field'] = field_txt_field.value
+                row_data['width'] = width_txt_field.value
+                row_data['sortable'] = sortable_drop_down.value
+                row_data['align'] = align_drop_down.value
             else:
                 #กรณีเพิ่มใหม่
                 input_data.append({

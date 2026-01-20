@@ -28,10 +28,13 @@ def dropdown_page_render(page):
         #สรา้ง Element
         output_str = f"<label>{{{{ t("+label_text_field.value+f") }}}} {required_tag} </label>\n" #ต้องใช้ {{{{  4 ตัว สำหรับ {{ ใน vue 
         output_str = output_str + f"<Dropdown\n"
+        output_str = output_str + f"    style=\"height: 32px;align-items: center;\"\n"
+        output_str = output_str + f"    class=\"general-input w-full\"\n"
+        output_str = output_str + f"    panelClass=\"panel-dropdown\"\n"
         output_str = output_str + f"    :options=\"{options_text_field.value}\"\n"
         output_str = output_str + f"    optionLabel=\"{option_label_field.value}\"\n"
         output_str = output_str + f"    optionValue=\"{option_value_field.value}\"\n"
-        output_str = output_str + f"    placeholder=\"t('"+ placeholder_text_field.value +"')\"\n"
+        output_str = output_str + f"    :placeholder=\"t('"+ placeholder_text_field.value +"')\"\n"
         output_str = output_str + f"    :filter=\"{filter_drop_down.value}\"\n"
         output_str = output_str + f"    :showClear=\"{show_clear_drop_down.value}\"\n"
         output_str = output_str + f"    v-model=\"{v_model_txt_field.value}\"\n"
@@ -40,7 +43,7 @@ def dropdown_page_render(page):
         output_str = output_str + f""
         output_str = output_str + f"    @hide=\"()=>checkDropDownHide({ref_txt_field.value})\" \n"
         output_str = output_str + f"    @change=\"()=>{v_model_txt_field.value}Change()\" \n"
-        output_str = output_str + f"/>\n"
+        output_str = output_str + f">\n"
 
         output_str = output_str + """
                         <template #option="slotProps">
@@ -56,8 +59,9 @@ def dropdown_page_render(page):
         output_str = output_str + "</Dropdown>\n"
         output_str = output_str + """
                 <div class="display-error-row">
-                    <small class="input-error text-ellipsis">
+                    <small class="input-error text-ellipsis" v-if="error..." >
                         <!-- Error Message -->
+                        {{{{ .... }}}}
                     </small>
                 </div>
         """
