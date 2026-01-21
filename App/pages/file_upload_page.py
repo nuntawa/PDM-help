@@ -20,6 +20,15 @@ def file_upload_page_render(page):
             const {ref_text_field.value} = ref();
             const {v_model_text_field.value} = ref();
 
+            watch([{v_model_text_field.value}],()=>{{
+                //กรณีเลือกไฟล์ แต่มี input  ที่  required  ก่อน 
+                if(! ....)
+                {{
+                    //แจ้งเตือน error
+                }}
+                 
+            }});
+
             const checkFileExists = (file) => {{
                 return new Promise((resolve, reject) => {{
                     if (typeof file.fileUrl != "string") {{
