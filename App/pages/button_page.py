@@ -4,7 +4,7 @@ def button_page_render(page):
 
     def gen_out_put(e):
 
-        import_field.value = "import ButtonPDM from \"@/components/middle/Button/buttonPDM.vue\";"
+        import_field.value = "import BlueThemButton from \"@/components/middle/BlueThemButton/BlueThemButton.vue\";"
 
         selected_type = []
         for cb in checkboxes:
@@ -31,8 +31,8 @@ def button_page_render(page):
                 output_str = output_str + f"<div class=\"flex justify-content-end\">\n"
                 content_end = True
             else:
-                output_str = output_str + f"    <ButtonPDM\n"
-                output_str = output_str + f"         :buttonText='"+btn_type+"'\n"
+                output_str = output_str + f"    <BlueThemButton\n"
+                output_str = output_str + f"         :buttonText=\"'"+btn_type+"'\"\n"
 
                 if btn_type == "Search" or btn_type == "Add" or btn_type == "Set" :
                     output_str = output_str + f"     :cssButton=\"'bg-blue'\"\n"

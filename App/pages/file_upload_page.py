@@ -62,7 +62,7 @@ def file_upload_page_render(page):
 
                     if (resUpload.responseCode === "0200") {
                         //แสดง  Toast  success
-                        //props.ShowErrorOrSuccessRef?.showSuccess();
+                        //props.showError?.showSuccess();
 
                     }
 
@@ -79,6 +79,10 @@ def file_upload_page_render(page):
                 }
             
             }
+
+            defineExpose({
+                onClear
+            });
             
         """
 
