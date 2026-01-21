@@ -41,9 +41,12 @@ def button_page_render(page):
                 if btn_type == "Save"  :
                     output_str = output_str + f"     :cssButton=\"'bg-green'\"\n"
                     output_str = output_str + f"     :disabled=\"!permissionEdit\"\n"    
-                if btn_type == "Report" or btn_type == "Generate" :
+                if btn_type == "Report" :
                     output_str = output_str + f"     :cssButton=\"'bg-back'\"\n"
                     output_str = output_str + f"     :disabled=\"!permissionReport\"\n"
+                if btn_type == "Generate" :
+                    output_str = output_str + f"     :cssButton=\"'bg-back'\"\n"
+                    output_str = output_str + f"     :disabled=\"!permissionEdit\"\n"
 
                 output_str = output_str + f"         :onClick=\"()=>{{ ... }}\"\n"
                 output_str = output_str + f"         :styleInline=\"''\"\n"
@@ -67,7 +70,7 @@ def button_page_render(page):
         ("Save", "Save"),
         ("Add", "Add"),
         ("Set", "Set"),
-        # ("Delete", "Delete"),
+        # ("Delete", "Delete"), #(ไปใช้  confirm  delete)
         ("Clear", "Clear"),
         ("Report", "Report"),
         ("Generate", "Generate"),
