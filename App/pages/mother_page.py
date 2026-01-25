@@ -16,6 +16,54 @@ def mother_page_render(page):
             page.open(alert_dlg)
             return
         
+        tab_import_str = ""
+        card_import_str = ""
+        tab_content_str = ""
+        card_content_str = ""
+        tab_script_str = ""
+
+        if content_dropdown.value == "tab":
+
+            tab_import_str = """import Card from "primevue/card";
+import TabView from "primevue/tabview";
+import TabPanel from "primevue/tabpanel";"""
+            tab_content_str = """  <div class="blue-tab-container">
+
+                <TabView :activeIndex="activeIndex" @tab-click="typeSwitch">
+                    <TabPanel :header="t('...')">
+                        <Card  class="pdm-box" >
+                            <template #content>
+                                
+                            </template>
+                        </Card>
+                    </TabPanel>
+                    <TabPanel :header="t('...')">
+                        <Card   class="pdm-box" >
+                            <template #content>
+                                
+                            </template>
+                        </Card>
+                    </TabPanel>
+                </TabView>
+                    
+
+</div> """
+            tab_script_str = """
+const activeIndex = ref(0);
+const typeSwitch = (event) => {
+  activeIndex.value = event.index;
+};
+"""
+
+        elif content_dropdown.value == "card":
+            card_import_str = "import Card from \"primevue/card\"; "
+            card_content_str = """<Card class="pdm-box">
+        <template #content>
+            
+        </template>
+</Card>"""
+
+
         output_str="""<template>
     <div>
 
@@ -36,6 +84,8 @@ def mother_page_render(page):
             :showError="(error) => ShowErrorOrSuccessRef.showError(error)"
             :notFoundMessage="'' /* ข้อความที่ต้องการให้แสดงถ้าไม่พบ compnay เพราะในหน้า  form  จะเป็น error  เรื่องสิทธิ ( ถ้าเป็นค่าว่างจะยึดตาม error ( responseCode , responseMessage ) ของ getCompanyInfo  ) */"
             />
+            """+tab_content_str+"""
+            """+card_content_str+"""
 
         <!--<หน้าลูก
                   ref="ชื่อref"
@@ -56,6 +106,8 @@ import showErrorOrSuccess from '@/components/middle/ShowErrorOrSuccess/showError
 import { useRoute,useRouter } from 'vue-router';
 import SettingService from '@/services/setting-service';
 import ShowErrorOrSuccess from '@/components/middle/ShowErrorOrSuccess/showError-or-success.vue';
+"""+tab_import_str+"""
+"""+card_import_str+"""
 
 const router = useRouter();
 
@@ -70,6 +122,8 @@ const programType = ref(\""""+module_dropdown.value+"""\");
 const programName = ref(\""""+program_name_field.value+"""\");
 
 const dataFromAPI = ref(null);
+
+"""+tab_script_str+"""
 
 const permissionAdd = ref(
   // SettingService.checkActionProgram(program.value, "CREATE")
@@ -182,14 +236,21 @@ const fetchData = async ()=>{
     #Text Field ที่แสดง code output
     output_field = ft.TextField(label="Code",value=" ",expand=True,multiline=True,min_lines=10,border_color="blue")
 
+    content_dropdown = ft.Dropdown(label="Content Type",options=[
+        ft.dropdown.Option(text="Tab",key="tab"),
+        ft.dropdown.Option(text="Card",key="card"),
+        ft.dropdown.Option(text="None",key="none")
+    ],value="tab")
+
     row_1 = ft.Row(controls=[ft.Text("หน้าแม่",size=15)])
-    row_2 = ft.Row(controls=[program_code_field,program_name_field,module_dropdown,gen_btn])
-    row_3 = ft.Row(controls=[output_field])
+    row_2 = ft.Row(controls=[program_code_field,program_name_field,module_dropdown,content_dropdown,gen_btn])
+    row_3 = ft.Row(controls=[])
+    row_4 = ft.Row(controls=[output_field])
 
     row_control = ft.Column(controls=[
         row_1,
         row_2,
-        row_3
+        row_4
          
     ])
 
