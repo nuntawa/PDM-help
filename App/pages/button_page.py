@@ -36,17 +36,18 @@ def button_page_render(page):
 
                 if btn_type == "Search" or btn_type == "Add" or btn_type == "Set" :
                     output_str = output_str + f"     :cssButton=\"'bg-blue'\"\n"
-                if btn_type == "Clear" :
+                if btn_type == "Clear" or btn_type == "Back" :
                     output_str = output_str + f"     :cssButton=\"'font-black'\"\n"
                 if btn_type == "Save"  :
                     output_str = output_str + f"     :cssButton=\"'bg-green'\"\n"
                     output_str = output_str + f"     :disabled=\"!permissionEdit\"\n"    
                 if btn_type == "Report" :
                     output_str = output_str + f"     :cssButton=\"'bg-back'\"\n"
-                    output_str = output_str + f"     :disabled=\"!permissionReport\"\n"
+                    #output_str = output_str + f"     :disabled=\"!permissionReport\"\n"
                 if btn_type == "Generate" :
                     output_str = output_str + f"     :cssButton=\"'bg-back'\"\n"
-                    output_str = output_str + f"     :disabled=\"!permissionEdit\"\n"
+                    output_str = output_str + f"     :disabled=\"!permissionEdit /*กลุ่ม  Report  ไม่ต้องมี เช็คสิทธิ ( สิทธิ view ) */\"\n"
+                    # พี่ทีบอก นาทีที่ 3:01 https://cpallgroup-my.sharepoint.com/personal/sudjaij_gosoft_co_th/_layouts/15/stream.aspx?id=%2Fpersonal%2Fsudjaij%5Fgosoft%5Fco%5Fth%2FDocuments%2FRecordings%2FPDM%20TeamB%2D20260122%5F135254%2DMeeting%20Recording%201%2Emp4&referrer=StreamWebApp%2EWeb&referrerScenario=AddressBarCopied%2Eview%2E417b8c01%2D17c4%2D4d95%2Da58c%2D4ce16c733912&startedResponseCatch=true
 
                 output_str = output_str + f"         :onClick=\"()=>{{ ... }}\"\n"
                 output_str = output_str + f"         :styleInline=\"''\"\n"
@@ -74,6 +75,7 @@ def button_page_render(page):
         ("Clear", "Clear"),
         ("Report", "Report"),
         ("Generate", "Generate"),
+        ("Back", "Back"),
     ]
 
     checkboxes = []
