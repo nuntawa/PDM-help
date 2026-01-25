@@ -312,8 +312,16 @@ defineExpose({
                         ft.Text(row_data['width'], width=70),
                         ft.Text(row_data['sortable'], width=70),
                         ft.Text(row_data['align'], width=70),
-                        ft.IconButton(icon=ft.Icons.EDIT, on_click=lambda e, rd=row_data: open_dlg(rd)),
-                        ft.IconButton(icon=ft.Icons.DELETE_OUTLINE, on_click=lambda e, i=idx: (input_data.pop(i), render_row_page()))
+                        ft.FilledButton(icon=ft.Icons.EDIT_OUTLINED, text="Edit",width=100,
+                                      style=ft.ButtonStyle(
+                                          shape=ft.RoundedRectangleBorder(radius=10),
+                                      ),
+                                      on_click=lambda e, rd=row_data: open_dlg(rd)),
+                        ft.FilledButton(icon=ft.Icons.DELETE_OUTLINE, text="Delete",width=100,
+                                      style=ft.ButtonStyle(
+                                          shape=ft.RoundedRectangleBorder(radius=10),
+                                      ),
+                                      on_click=lambda e, i=idx: (input_data.pop(i), render_row_page()))
                     ],height=25),
                     # border=ft.border.all(1, ft.colors.BLACK),
                     # border_radius=ft.border_radius.all(6),
