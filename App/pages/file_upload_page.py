@@ -71,7 +71,7 @@ def file_upload_page_render(page):
 
                     if (resUpload.responseCode === "0200") {
                         //แสดง  Toast  success
-                        //props.showError?.showSuccess();
+                        //showSuccess
 
                     }
 

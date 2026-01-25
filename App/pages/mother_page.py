@@ -41,7 +41,8 @@ def mother_page_render(page):
                   ref="ชื่อref"
                   v-if="dataFromAPI"
                   :dataFromAPI="dataFromAPI"
-                  :ShowErrorOrSuccessRef="ShowErrorOrSuccessRef"
+                  :showError="showError"
+                  :showSuccess="showSuccess"
         />-->
 
     </div>
@@ -84,9 +85,7 @@ const permissionDelete = ref(
   SettingService.checkActionProgram(programCode.value, "DELETE")
 );
 
-const permissionReport = ref(
-  SettingService.checkActionProgram(programCode.value, "Report")
-);
+
 
 const showError = ref((error) => {
   // สำหรับ แสดง Error ส่งให้หน้าลูก
@@ -98,14 +97,24 @@ const showError = ref((error) => {
   
 });
 
+const showSuccess = ref(() => {
+  // สำหรับ แสดง Error ส่งให้หน้าลูก
+  if (store.state.loading) {
+    store.dispatch("endLoading");
+  }
+
+    
+  ShowErrorOrSuccessRef.value.showSuccess();
+  
+});
+
 onMounted(async ()=>{
 
     if (
         !permissionAdd.value &&
         !permissionView.value &&
         !permissionEdit.value &&
-        !permissionDelete.value &&
-        !permissionReport.value
+        !permissionDelete.value
     ) {
         store.dispatch("setPermissionActionFlag", "2"); //ไม่ไปหน้าไหนเลย
         store.dispatch("noPermissionAction");
