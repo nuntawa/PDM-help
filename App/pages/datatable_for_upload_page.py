@@ -14,7 +14,7 @@ def datatable_for_upload_page_render(page):
         
         output_str = """<DatatableForUpload
     ref="AcceptTableRef"
-    :hideFilterText="false /* ซ่อนค้นหาตาม  text box หรือไม่ */
+    :hideFilterText="false /* ซ่อนค้นหาตาม  text box หรือไม่ */"
     :tableStructure="[\n"""
 
         for idx,col in enumerate(input_data):
@@ -31,7 +31,7 @@ def datatable_for_upload_page_render(page):
             else:
                 output_str = output_str + "\n"
 
-        output_str = output_str + "     ]\n"
+        output_str = output_str + "     ]\"\n"
         output_str = output_str + "     :searchField=\"[ /* ค้นหาตาม column  อะไรได้บ้าง */ \n"
 
         for idx,col in enumerate(input_data):
