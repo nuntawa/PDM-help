@@ -4,13 +4,18 @@ def button_page_render(page):
 
     def gen_out_put(e):
 
-        import_field.value = "import BlueThemButton from \"@/components/middle/BlueThemButton/BlueThemButton.vue\";"
-
         selected_type = []
         for cb in checkboxes:
             if cb.value:
                 selected_type.append(cb.key)
+        
 
+        import_field.value = "" #เคลียร์ค่าเดิมก่อน
+        import_field.value = import_field.value + "import BlueThemButton from \"@/components/middle/BlueThemButton/BlueThemButton.vue\";\n"
+
+        if "Delete" in selected_type:#กรณีเลือกปุ่ม Delete
+            import_field.value =  import_field.value + "import ConfirmDelete from \"@/components/middle/DeleteDialog/ConfirmDelete.vue\";"
+        
         if len(selected_type) == 0: #กรณีไม่เลือกประเภทปุ่มเลย
             alert_dlg = ft.AlertDialog(
             modal=True,
@@ -30,7 +35,7 @@ def button_page_render(page):
             if btn_type == "content-end":
                 output_str = output_str + f"<div class=\"flex justify-content-end\">\n"
                 content_end = True
-            else:
+            elif btn_type !="Delete":
                 output_str = output_str + f"    <BlueThemButton\n"
                 output_str = output_str + f"         :buttonText=\"'"+btn_type+"'\"\n"
 
@@ -48,14 +53,64 @@ def button_page_render(page):
                     output_str = output_str + f"     :cssButton=\"'bg-back'\"\n"
                     output_str = output_str + f"     :disabled=\"!permissionEdit /*กลุ่ม  Report  ไม่ต้องมี เช็คสิทธิ ( สิทธิ view ) */\"\n"
                     # พี่ทีบอก นาทีที่ 3:01 https://cpallgroup-my.sharepoint.com/personal/sudjaij_gosoft_co_th/_layouts/15/stream.aspx?id=%2Fpersonal%2Fsudjaij%5Fgosoft%5Fco%5Fth%2FDocuments%2FRecordings%2FPDM%20TeamB%2D20260122%5F135254%2DMeeting%20Recording%201%2Emp4&referrer=StreamWebApp%2EWeb&referrerScenario=AddressBarCopied%2Eview%2E417b8c01%2D17c4%2D4d95%2Da58c%2D4ce16c733912&startedResponseCatch=true
-
+                
                 output_str = output_str + f"         :onClick=\"()=>{{ ... }}\"\n"
                 output_str = output_str + f"         :styleInline=\"''\"\n"
+                output_str = output_str + f"    />\n\n"
+            else: #กรณีปุ่ม Delete
+                output_str = output_str + f"    <ConfirmDelete\n"
+                output_str = output_str + f"         v-model:visible=\"visibleConfirmDelete\"\n"
+                output_str = output_str + f"         :visible=\"visibleConfirmDelete\"\n"
+                output_str = output_str + f"         :onClick=\"openDialogDelete\"\n"
+                output_str = output_str + f"         @openDialog=\"openDialogDelete\"\n"
+                output_str = output_str + f"         @confirm=\"handleConfirmDelete\"\n"
+                output_str = output_str + f"         :disabled=\"'!permissionDelete'\"\n"
                 output_str = output_str + f"    />\n\n"
         #end for
 
         if content_end:
-            output_str = output_str + f"</div>"
+            output_str = output_str + f"</div>\n"
+
+        if "Delete" in selected_type:
+            output_str = output_str + "<-----Script ------->\n"
+            output_str = output_str + "const visibleConfirmDelete = ref(false);/*  ปิด เปิด  popup  confirm ลบ */\n"
+            output_str = output_str + """const openDialogDelete = () => {  
+
+                /* validate  ก่อน  เปิด  popup  */
+            
+                visibleConfirmDelete.value = true; 
+
+            }\n  """
+            output_str = output_str + """const handleConfirmDelete = async (confirm) => { 
+
+                try {
+    
+    if (confirm) {
+        store.dispatch("startLoading");
+      
+        /*const res = await ObjAPI.เรียก API  delete(req);
+
+        if (res.responseCode !== "0200") {
+          throw {
+            message: res.responseMessage,
+            responseCode: res.responseCode,
+          };
+        }*/
+
+        store.dispatch("endLoading");
+        props.showSuccess();
+     
+    }
+   
+  } catch (error) {
+    store.dispatch("endLoading");
+    props.showError({
+      message: error.message,
+      responseCode: error.responseCode,
+    });
+  }
+
+            }\n  """
 
         output_field.value = output_str
         page.update()
@@ -71,7 +126,7 @@ def button_page_render(page):
         ("Save", "Save"),
         ("Add", "Add"),
         ("Set", "Set"),
-        # ("Delete", "Delete"), #(ไปใช้  confirm  delete)
+        ("Delete", "Delete"), #(ไปใช้  confirm  delete)
         ("Clear", "Clear"),
         ("Report", "Report"),
         ("Generate", "Generate"),
