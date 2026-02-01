@@ -7,6 +7,7 @@ from pages.file_upload_page import file_upload_page_render
 from pages.card_has_tap import card_has_tab_render
 from pages.datatable_for_upload_page import datatable_for_upload_page_render
 from pages.grid_page import grid_page_render
+from pages.calendar_page import calendar_page_render
 
 def main(page: ft.Page):
     page.title = "PDM"
@@ -70,6 +71,7 @@ def main(page: ft.Page):
         {"group":"component","name":"File Upload","page":"file_upload_page"},
         {"group":"component","name":"DatatableForUpload","page":"datatable_for_upload_page"},
         {"group":"layout","name":"Grid","page":"grid_page"},
+        {"group":"component","name":"Calendar","page":"calendar_page"},
     ]
 
     for menu_item in menu_list:
@@ -94,6 +96,7 @@ def main(page: ft.Page):
     card_has_tab_page = card_has_tab_render(page)
     datatable_for_upload_page = datatable_for_upload_page_render(page)
     grid_page = grid_page_render(page)
+    calendar_page = calendar_page_render(page)
 
     #เก็บหน้าต่างๆ
     page_list={
@@ -105,6 +108,7 @@ def main(page: ft.Page):
         "card_has_tab_page":card_has_tab_page,
         "datatable_for_upload_page":datatable_for_upload_page,
         "grid_page":grid_page,
+        "calendar_page":calendar_page,
     }
 
     def show_error(title,text):
