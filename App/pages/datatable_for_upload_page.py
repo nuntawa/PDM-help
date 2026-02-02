@@ -105,6 +105,9 @@ const errorData = ref({
 });
 
 const resetData = () => {
+    AcceptTableRef.value.reset(); //เพื่อให้  clear ข้อมูลใน table
+    ErrorTableRef.value.reset();
+
   acceptData.value = {
     totalRow: 0,
     acceptDataList: [],
@@ -124,6 +127,7 @@ const setData = (data) => {
     errorData.value.totalRow = data.totalRowError ? data.totalRowError : 0;
 
     AcceptTableRef.value.reset(); //เพื่อให้  clear ข้อมูลใน table
+    ErrorTableRef.value.reset();
 
     // acceptData.value = data;
 
