@@ -64,7 +64,7 @@ def button_page_render(page):
                 output_str = output_str + f"         :onClick=\"openDialogDelete\"\n"
                 output_str = output_str + f"         @openDialog=\"openDialogDelete\"\n"
                 output_str = output_str + f"         @confirm=\"handleConfirmDelete\"\n"
-                output_str = output_str + f"         :disabled=\"'!permissionDelete'\"\n"
+                output_str = output_str + f"         :disabled=\"!permissionDelete\"\n"
                 output_str = output_str + f"    />\n\n"
         #end for
 
