@@ -27,7 +27,7 @@ import { useDateFormat } from "@vueuse/core";"""
 
         #สร้าง Element
         output_str = f"""
-        <label>{{{{ t('Calendar.{label_field.value}') }}}} { required_tag }</label>\n
+        <label>{{{{ t('{label_field.value}') }}}} { required_tag }</label>\n
         <div>
             <Calendar
                 style="width: 100%; height: 32px"

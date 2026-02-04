@@ -16,13 +16,13 @@ def grid_page_render(page):
             if cb.key == "no-padding-grid-top" and cb.value:
                 no_padding_grid_top = " no-padding-grid-top"
 
-        output_str = f"<div class=\"grid{no_padding_grid_bottom} {no_padding_grid_top}\">\n"
+        output_str = f"<div class=\"grid\">\n"
 
         for row in input_data:
             flex_class = ""
             if row['flex_class']:
                 flex_class = " flex align-items-center"
-            output_str = output_str + f"    <div class=\"col-{row['column_n']} {flex_class}\">\n"
+            output_str = output_str + f"    <div class=\"col-{row['column_n']} {no_padding_grid_bottom} {no_padding_grid_top} {flex_class}\">\n"
             output_str = output_str + f"      { '<!--  สำหรับปุ่ม  search-->' if flex_class != '' else '' }   \n"
             output_str = output_str + "    </div>\n"
         
